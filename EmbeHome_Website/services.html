@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Our Services â€” EmbeHome Automations & Technologies</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon" />
+
+  <!-- Fonts & icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- Library CSS -->
+  <link href="lib/animate/animate.min.css" rel="stylesheet" />
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+  <!-- Core CSS (same as index.html) -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+
+  <style>
+    /* Services page specific overrides */
+    .services-hero {
+      padding: 88px 0;
+      background: linear-gradient(180deg,#07102a 0%, #071a2f 100%);
+      color: #ffffff;
+      text-align: center;
+    }
+    .services-hero .lead { max-width: 900px; margin: 0 auto; color: rgba(255,255,255,0.92); }
+
+    .services-grid { margin-top: 28px; }
+
+    /* Card style: image full-width, taller height */
+    .service-item {
+      background: #ffffff;
+      padding: 0;
+      border-radius: 12px;
+      height: 100%;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(2,8,23,0.06);
+      transition: transform .18s ease, box-shadow .18s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-item:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(2,8,23,0.12); }
+
+    .service-image {
+      width: 100%;
+      height: 240px;        /* <-- image height: increase/decrease as needed */
+      object-fit: cover;
+      display: block;
+    }
+
+    .service-body {
+      padding: 20px 20px 26px;
+      text-align: left;
+    }
+
+    .service-body h3 {
+      font-size: 1.125rem;
+      color: #022447;
+      margin-bottom: 10px;
+    }
+
+    .service-body p {
+      color: #334455;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      margin-bottom: 0;
+    }
+
+    .testimonials { background: #f8f9fb; padding: 10px 0; }
+    .testimonial { padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .testimonial h5 { margin-bottom: 2px; color: #022447; }
+    .testimonial p { margin-bottom: 0; color: #445566; }
+
+    @media (max-width: 991px) {
+      .services-hero { padding: 56px 16px; }
+      .service-image { height: 180px; }
+    }
+
+    /* ---------- Hover text color fix for service cards ---------- */
+/* Put this after all other CSS so it overrides any global hover rules */
+
+.service-item,
+.service-item * { /* ensure defaults */
+  color: inherit;
+}
+
+/* Make sure card body stays white on hover */
+.service-item:hover,
+.service-item:focus {
+  background: #ffffff !important;   /* keep white background */
+}
+
+/* Force the heading and paragraph colors on hover */
+.service-item:hover .service-body h3,
+.service-item:focus .service-body h3 {
+  color: #022447 !important;        /* same as non-hover heading color */
+}
+
+.service-item:hover .service-body p,
+.service-item:focus .service-body p {
+  color: #334455 !important;        /* same as non-hover paragraph color */
+}
+
+/* If your theme applies text-shadow or opacity on hover, reset it */
+.service-item:hover .service-body h3,
+.service-item:hover .service-body p {
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Prevent child links/buttons from switching color to white */
+.service-item:hover a,
+.service-item:hover a * {
+  color: inherit !important;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar (synchronized with index.html) -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+    <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+      <h3 class="text-primary m-0"><img class="me-3" src="img/icons/icon-11.png" alt="Icon" />EmbeHome Automations</h3>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav ms-auto p-4 p-lg-0">
+        <a href="index.html" class="nav-item nav-link">Home</a>
+        <a href="about.html" class="nav-item nav-link">About</a>
+        <a href="products.html" class="nav-item nav-link">Products</a>
+        <a href="collaborate.html" class="nav-item nav-link">Collaborate</a>
+        <a href="services.html" class="nav-item nav-link active">Services</a>
+        <a href="contact.html" class="nav-item nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <!-- Hero -->
+  <div class="container-fluid services-hero">
+    <div class="container">
+      <p class=" mb-0">
+        At EmbeHome, we collaborate with startups, enterprises, and B2B customers to transform ideas into fully 
+        engineered, production-ready products. Leveraging our end-to-end expertise in embedded hardware, firmware, cloud platforms,
+         and user-facing software,we deliver solutions precisely aligned with your business goals and technical requirements.
+      </p>
+    </div>
+  </div>
+
+  <!-- Services Grid -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="row services-grid g-4">
+
+        <!-- Card 1: Mobile App -->
+        <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/Mob.png" alt="Mobile Application Development"
+                 onerror="this.onerror=null;this.src='img/icons/mobile.png';" />
+            <div class="service-body">
+              <h3>Mobile Application Development</h3>
+              <p>
+                Expand your reach and engage customers on the go with our
+mobile app development services. We build custom iOS and Android applications with user-centric
+design and scalable architecture to meet your business needs.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 2: Web App -->
+        <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/Web.png" alt="Web Application Development"
+                 onerror="this.onerror=null;this.src='img/icons/web.png';" />
+            <div class="service-body">
+              <h3>Web Application Development</h3>
+              <p>
+                Strengthen your online presence with robust web solutions tailored to
+your goals. Our team develops responsive, secure, and scalable web applications that drive business
+growth and deliver seamless user experiences.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 3: SaaS -->
+        <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/SaaS.png" alt="SaaS Development"
+                 onerror="this.onerror=null;this.src='img/icons/saas.png';" />
+            <div class="service-body">
+              <h3>SaaS & Cloud Platforms</h3>
+              <p>
+                 Unlock new revenue streams and easy scalability through
+cloud-based SaaS platforms. We design and implement multi-tenant, cloud-native applications that let
+you deliver software to your customers as a subscription service, with continuous upgrades and
+dedicated support.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 4: Data -->
+        <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/Data.png" alt="Data Analytics & Insights"
+                 onerror="this.onerror=null;this.src='img/icons/data.png';" />
+            <div class="service-body">
+              <h3>Data Analytics & Insights</h3>
+              <p>
+                 Make data-driven decisions with confidence. We set up data pipelines,
+interactive dashboards, and AI-powered analytics that transform raw information into meaningful
+insights, helping you identify trends, optimize operations, and predict future outcomes.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 5: IoT -->
+        <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/IoT.png" alt="IoT & Embedded Systems"
+                 onerror="this.onerror=null;this.src='img/icons/iot.png';" />
+            <div class="service-body">
+              <h3>IoT & Embedded Systems</h3>
+              <p>
+                Connect the physical and digital worlds with our Internet of Things expertise. From
+smart home devices to industrial sensors, we develop integrated IoT systems that collect and analyze
+real-time data, giving you automated control and valuable business insights.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 6: QA -->
+        <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/QA.png" alt="Quality Assurance & Testing"
+                 onerror="this.onerror=null;this.src='img/icons/qa.png';" />
+            <div class="service-body">
+              <h3>Quality Assurance & Testing</h3>
+              <p>
+                 Ensure a flawless product launch with our rigorous QA and testing
+services. We perform comprehensive manual and automated tests to eliminate bugs, strengthen
+security, and guarantee optimal performance and reliability before your software goes live.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 7: Server Hosting -->
+        <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/Server.png" alt="Server Hosting & Management"
+                 onerror="this.onerror=null;this.src='img/icons/server.png';" />
+            <div class="service-body">
+              <h3>Server Hosting & Management</h3>
+              <p>
+                 Deploy with confidence on our managed cloud infrastructure. We
+handle server setup, scaling, and 24/7 monitoring for your applications, ensuring high availability, data
+security, and smooth operations post-deployment.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 8: Hotel SaaS -->
+        <!-- <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/Hotel.png" alt="Hotel & Travel SaaS Systems"
+                 onerror="this.onerror=null;this.src='img/icons/hotel.png';" />
+            <div class="service-body">
+              <h3>Hotel & Travel SaaS Systems</h3>
+              <p>
+                Property and booking platforms with inventory, billing and reporting â€” built to centralize operations and
+                improve guest experiences for hotels and travel operators.
+              </p>
+            </div>
+          </article>
+        </div> -->
+
+        <!-- Card 9: Game / Gamification -->
+        <!-- <div class="col-lg-4 col-md-6">
+          <article class="service-item">
+            <img class="service-image" src="img/services/Game.png" alt="Game Theory & Gamification"
+                 onerror="this.onerror=null;this.src='img/icons/game.png';" />
+            <div class="service-body">
+              <h3>Game Theory & Gamified Experiences</h3>
+              <p>
+                Gamified UX and interactive web experiences to boost engagement â€” leaderboards, rewards, and performant
+                mechanics for web and mobile users.
+              </p>
+            </div>
+          </article>
+        </div> -->
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+  </div> <!-- /.container-xxl -->
+
+  <!-- Testimonials -->
+  <div class="container-xxl py-5 testimonials">
+    <div class="container">
+      <h2 class="mb-4">Testimonials</h2>
+
+      <div class="testimonial">
+        <h5>RaneT4u (Battery Management System)</h5>
+        <p> EmbeHome delivered a custom battery management
+platform that automated RaneT4u's facility operations. "Their expertise and support were
+exceptional," notes the RaneT4u team after seeing improved efficiency and control.</p>
+      </div>
+
+      <div class="testimonial">
+        <h5> Blazetrack Pvt.Ltd.(Dashpod)</h5>
+        <p>EmbeHome developed Blazetrack's Dashpod platform from concept
+to launch. "It felt like one team working towards our success," says the Blazetrack team after a
+successful, on-time product launch.</p>
+      </div>
+
+      <div class="testimonial">
+        <h5>Villas Street (Hotel Management)</h5>
+        <p>For Villas Street, EmbeHome created a comprehensive hotel
+management system that streamlined bookings and daily operations, significantly improving guest
+service and internal efficiency. "EmbeHome truly understood our needs and delivered," recalls the
+Villas Street management.</p>
+      </div>
+
+      <div class="testimonial"> </div>
+      <h5>Game Theory (Web Application)</h5>
+      <p>EmbeHome partnered with Game Theory to build an interactive web
+application from the ground up, delivering a high-performance platform that significantly enhanced
+user engagement. "Our online experience was elevated to a new level," says the Game Theory team</p>
+    </div>
+  </div>
+
+  <!-- Footer (copied from index.html) -->
+  <div class="container-fluid bg-dark text-body footer mt-2 pt-2 px-0 wow fadeIn" data-wow-delay="0.1s">
+      <div class="container py-5">
+          <div class="row g-5">
+              <div class="col-lg-5 col-md-6 ">
+                  <h3 class="text-light mb-4">Address</h3>
+                  <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>Tilak Road, Rajahmundry, INDIA</p>
+                  <p class="mb-2"><i class="fa fa-phone-alt text-primary me-3"></i>8688778353</p>
+                  <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i>info@embehome.in</p>
+              </div>
+              <div class="col-lg-4 col-md-6 col align-self-center">
+                  <div class="d-flex pt-2">
+                      <a class="btn btn-square btn-outline-body me-1" href=""><i class="fab fa-twitter"></i></a>
+                      <a class="btn btn-square btn-outline-body me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                      <a class="btn btn-square btn-outline-body me-1" href=""><i class="fab fa-youtube"></i></a>
+                      <a class="btn btn-square btn-outline-body me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <h3 class="text-light mb-4">Solutions</h3>
+                  <a class="btn btn-link" href="">Home Automation</a>
+                  <a class="btn btn-link" href="">IoT Solutions</a>
+                  <a class="btn btn-link" href="">Software Development</a>
+              </div>
+          </div>
+      </div>
+      <div class="container-fluid copyright">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
+                      &copy; <a href="#">EmbeHome Automation & Technologies Private Limited</a>, All Right Reserved.
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- JavaScript Libraries (same order as index.html) -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/tempusdominus/js/moment.min.js"></script>
+  <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+  <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+  <!-- Template Javascript -->
+  <script src="js/main.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
