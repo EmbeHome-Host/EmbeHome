@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Login with tronx</title><!-- Material Design for Bootstrap CSS--><!-- link(rel='stylesheet', type='text/css', href='/assets/css/bootstrap-material-design.min.css')--><link rel="stylesheet" href="./Login with tronx_files/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"><!-- link(rel='stylesheet', type='text/css', href='/assets/css/style.css')--><style>@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,400,600');
+body{ background:#ffffff; font-family: 'Nunito Sans', sans-serif; }
+.container{ padding: 0px;}
+.header{ display:block; padding:14px 10px 16px; background:#FCFCFC; border-bottom:1px solid #EEEEEE; text-align: center;}
+.header img{ max-width: 100%; display:inline-block; outline:none; }
+.bdcont{ padding:32px 16px 24px 16px;}
+.bdcont form{ padding:5% 0;}
+.bdcont .title, .bdcont .sub-title{ display: block; text-align: center; font-family: inherit; }
+.bdcont .title{  font-size: 24px; font-weight: 200; color:#333333;  }
+.bdcont .sub-title, .info{ font-size: 14px; font-weight:400; color:#545454; text-align: center; line-height: 20px}
+.info{ padding:20px 0px 50px }
+.tx-button { display: block; text-align: center; margin-bottom: 32px; margin-top:40px !important;}
+.tx-button .btn{ background-color:#cd9548 !important; font-family: inherit; font-weight:400;  padding-right:50px; padding-left:50px; box-shadow: none !important; margin-bottom:0px !important; font-size: 16px; }
+.btn-link { display:inline-block; font-weight: 300 !important; /*color:#16AAAA !important;*/ margin-bottom:24px !important; }
+.btn-link:hover{ text-decoration: none;}</style></head><body cz-shortcut-listen="true"><div class="container"><div class="header"><img src="./Login with tronx_files/logo2.png" alt="tronx"></div><div class="bdcont"><h4 class="title">Login</h4><label class="sub-title">Login wth your existing EmbeHome ID</label><label class="sub-title"></label><form id="submitUserDetails" novalidate="novalidate"><div class="form-group bmd-form-group"><label class="bmd-label-floating" for="email">Email</label><input class="form-control" id="email" type="email" name="email"></div><div class="form-group bmd-form-group"><label class="bmd-label-floating" for="password">Password</label><input class="form-control" id="password" type="password" name="password"></div><div><input id="redirect_uri" type="hidden" name="redirect_uri" value="https://alexa.amazon.co.jp/api/skill/link/MR5MUZUEUO35N"><input id="state" type="hidden" name="state" value="A2SAAEAELF4_7khhn5GzxCTLSELpb8CENXnnhjZuKcUNvmsX3cd4oQ0RHA0H_5wXGaCd_DhU1hlHMKi3Q_GdyybYBi-xd07DmPvsNYqgysyCiFFxGQpF-O56I3i7L9mNwqoIUBuoFLwCyZ4l7e-9uXqsbYZh7C--Cnh8Tlrg9U_U1sVckhkTuhAGLga5uORp5fe7iLNXjEFOoY35B5vfaQ6eYF_4P9_YnxemI46-7VQSU1op4gZAp8yT2NUrOYNe-Y_N9ndnk4dg3ze2YAHqwgzHjKrG2ZE28Ods1AQpfiJ0duRsQ0jUsU8eAzVtk3q86He7t6tOvb_DHcM8LfbrRsEwNGn3VjqwLZ1S-FAS-TXwL3S-FyRrmgwgF6a4xZAohSJm6oz-RxjanZRIvwTWgW9YPUwjrhbggukQdpsVIxRm6mekkGL2zeUPd8F4rKA2pEfZLnPA3TLOVZQxYbQZxqBVeuLhgv9CcxSPAyf7sJGGzOiDANKk6oxK4yvuCzqtlRb8k3f7jl3PLvNTo8GV5meChHHQ3IXTdfNpRAPBx2sM9NAScwxse9Xq_-DGrjqzuS011q4zZo4lXZQ7KGR14Ylvsk04iJqWTFnO5Gh8U5Zsb5-BEBRf0crpdaUZ52TMMYVaRTQc2Lw5EeBRr0qIadSqSAosKGhVqvhR4W-iWu1V8aU7pGAZjZI7mZWcjndhkhhNVTOFjzNAQOVpXaHCD1W7vw9exKFeA"></div><div id="postResultDiv"></div><div class="tx-button"><button class="btn btn-primary btn-raised" type="submit">Submit</button></div><div class="text-center"><a class="btn-link" href="https://2ssquare.in/api/aws/forgotpassword">Forgot password?</a></div></form></div></div><!-- jQuery first, then Popper.js, then Bootstrap JS--><script src="./Login with tronx_files/jquery.min.js.download"></script><script src="./Login with tronx_files/popper.min.js.download" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script><script src="./Login with tronx_files/bootstrap-material-design.js.download" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script><script src="./Login with tronx_files/jquery.validate.min.js.download"></script><script>$(document).ready(function() {
+    $('body').bootstrapMaterialDesign();
+	var urlParams = new URLSearchParams(window.location.search);
+    var state = urlParams.get("state");
+	var redirect_uri = urlParams.get("redirect_uri");
+    $("#submitUserDetails").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true
+            }
+        },
+        
+        submitHandler: function (form) {
+
+            var formData = {
+                email: $("#email").val(),
+                password: $("#password").val(),
+                realm: "Smartron",
+                redirect_uri: redirect_uri,
+                state: state
+            }
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "https://2ssquare.in/api/aws/authorization",
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                success: function(res) {
+                    console.log(JSON.stringify(res));
+                    console.log("Redirecting to alexa redirect uri");
+                    location.href = res.url_string;
+                    },
+                error: function(res)   {
+                    console.log("Error");
+                        $("#postResultDiv").html("<p style='color:red'>" + "Invalid Username/Password <br>" + "</p>");
+                }
+            });
+            return false; // required to block normal submit since you used ajax
+        }
+    });
+
+
+    $('#forgotpassword').validate({
+        rules: {
+            "email": {
+                validate_email: true,
+                email: true
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parent());
+        },
+
+        submitHandler: function(form) {
+            var email = $(form).find("input[type=email]").val();
+
+
+            var formData = {
+                email: $("#email").val()
+            }
+
+            $.ajax({
+                url: "/api/user/forgot_password",
+                contentType: "application/json",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify(formData),
+                beforeSend: function(xhr, settings) {
+                    $("form#forgotpassword").find("input[type='submit']").attr("disabled", true);
+                },
+                success: function(resp) {
+                    document.getElementById("forgotpassword").reset();
+                    $(".bg-danger").hide();
+                    $("form#forgotpassword").find("input[type='submit']").removeClass('disabled');
+                    $("form#forgotpassword").replaceWith('<div class=""><div class="activateemail-container" style="margin: 55px 0px;"><p class="activateemail-text">We have sent a password reset link to your email id <b>'+email+'<b></p></div></div>');
+
+                },
+                error: function(xhr, status, error) {
+                    var resp = $.parseJSON(xhr.responseText);
+                    $(".bg-danger").hide();
+                    $('<p style="color:red";padding: 10px 0px;>'+resp.error+'</p>').insertAfter('#email');
+                    $("form#forgotpassword").find("input[type='submit']").val('Reset').removeClass('disabled');
+                },
+                complete: function(xhr, status) {
+
+                }
+            });
+            return false;
+        }
+    });
+
+
+});</script></body></html>
