@@ -4,12 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Login with EmbeHome Automations</title>
+    <title>Login with EmbeHome</title>
 
     <link rel="stylesheet"
-          href="./Login with tronx_files/bootstrap-material-design.min.css"
-          integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX"
-          crossorigin="anonymous">
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.1.3/css/bootstrap-material-design.min.css">
 
     <style>
         @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,400,600');
@@ -98,6 +96,11 @@
         .btn-link:hover {
             text-decoration: none;
         }
+
+        .error {
+            color: red;
+            font-size: 13px;
+        }
     </style>
 </head>
 
@@ -109,7 +112,7 @@
 
     <div class="bdcont">
         <h4 class="title">Login</h4>
-        <label class="sub-title">Login with your existing EmbeHome ID</label>
+        <label class="sub-title">Login with your existing EmbeHome Credentials</label>
         <label class="sub-title" id="accountLinkInfo"></label>
 
         <form id="submitUserDetails" novalidate="novalidate">
@@ -143,18 +146,16 @@
     </div>
 </div>
 
-<script src="./Login with tronx_files/jquery.min.js.download"></script>
-<script src="./Login with tronx_files/popper.min.js.download"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="./Login with tronx_files/bootstrap-material-design.js.download"
-        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
-        crossorigin="anonymous"></script>
-<script src="./Login with tronx_files/jquery.validate.min.js.download"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.1.3/js/bootstrap-material-design.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
 <script>
     $(document).ready(function () {
-        $('body').bootstrapMaterialDesign();
+        if ($.fn.bootstrapMaterialDesign) {
+            $('body').bootstrapMaterialDesign();
+        }
 
         var urlParams = new URLSearchParams(window.location.search);
 
@@ -180,6 +181,16 @@
                 },
                 password: {
                     required: true
+                }
+            },
+
+            messages: {
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email"
+                },
+                password: {
+                    required: "Please enter your password"
                 }
             },
 
@@ -226,57 +237,6 @@
                         $("#postResultDiv").html(
                             "<p style='color:red'>Invalid Username/Password <br></p>"
                         );
-                    }
-                });
-
-                return false;
-            }
-        });
-
-        $("#forgotpassword").validate({
-            rules: {
-                "email": {
-                    validate_email: true,
-                    email: true
-                }
-            },
-            errorPlacement: function (error, element) {
-                error.insertAfter(element.parent());
-            },
-
-            submitHandler: function (form) {
-                var email = $(form).find("input[type=email]").val();
-
-                var formData = {
-                    email: $("#email").val()
-                };
-
-                $.ajax({
-                    url: "/api/user/forgot_password",
-                    contentType: "application/json",
-                    type: "POST",
-                    dataType: "json",
-                    data: JSON.stringify(formData),
-                    beforeSend: function (xhr, settings) {
-                        $("form#forgotpassword").find("input[type='submit']").attr("disabled", true);
-                    },
-                    success: function (resp) {
-                        document.getElementById("forgotpassword").reset();
-                        $(".bg-danger").hide();
-                        $("form#forgotpassword").find("input[type='submit']").removeClass("disabled");
-                        $("form#forgotpassword").replaceWith(
-                            '<div class=""><div class="activateemail-container" style="margin: 55px 0px;"><p class="activateemail-text">We have sent a password reset link to your email id <b>' +
-                            email +
-                            "<b></p></div></div>"
-                        );
-                    },
-                    error: function (xhr, status, error) {
-                        var resp = $.parseJSON(xhr.responseText);
-                        $(".bg-danger").hide();
-                        $('<p style="color:red";padding: 10px 0px;>' + resp.error + "</p>").insertAfter("#email");
-                        $("form#forgotpassword").find("input[type='submit']").val("Reset").removeClass("disabled");
-                    },
-                    complete: function (xhr, status) {
                     }
                 });
 
