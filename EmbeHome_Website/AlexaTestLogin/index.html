@@ -1,176 +1,726 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Login with EmbeHome</title>
 
-    <title>Login with EmbeHome Automations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.1.3/css/bootstrap-material-design.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.1.3/css/bootstrap-material-design.min.css"/>
 
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,400,600');
+        :root {
+            --primary: #009A9A;
+            --primary-dark: #007C7C;
+            --primary-light: #E6F7F7;
+            --primary-soft: rgba(0, 154, 154, 0.12);
+            --accent: #009A9A;
+            --text: #1F2937;
+            --muted: #6B7280;
+            --border: #D9EAEA;
+            --card: rgba(255, 255, 255, 0.94);
+            --shadow: 0 26px 70px rgba(0, 84, 84, 0.18);
+            --radius: 26px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
 
         body {
-            background: #ffffff;
-            font-family: 'Nunito Sans', sans-serif;
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(0, 154, 154, 0.18), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(0, 124, 124, 0.14), transparent 26%),
+                linear-gradient(135deg, #F5FBFB 0%, #EEF8F8 42%, #FFFFFF 100%);
         }
 
-        .container {
-            padding: 0px;
+        .page-shell {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 16px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .header {
+        .page-shell::before {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            background: rgba(0, 154, 154, 0.08);
+            top: -260px;
+            right: -180px;
+            z-index: 0;
+        }
+
+        .page-shell::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: rgba(0, 154, 154, 0.07);
+            bottom: -220px;
+            left: -160px;
+            z-index: 0;
+        }
+
+        .auth-layout {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1220px;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+            border-radius: 34px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-panel {
+            position: relative;
+            padding: 56px 48px;
+            background:
+                linear-gradient(145deg, rgba(0, 154, 154, 0.98), rgba(0, 124, 124, 0.95)),
+                var(--primary);
+            color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .hero-panel::before,
+        .hero-panel::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.10);
+            filter: blur(1px);
+        }
+
+        .hero-panel::before {
+            width: 300px;
+            height: 300px;
+            top: -130px;
+            right: -90px;
+        }
+
+        .hero-panel::after {
+            width: 250px;
+            height: 250px;
+            left: -90px;
+            bottom: -120px;
+        }
+
+        .hero-grid-lines {
+            position: absolute;
+            inset: 0;
+            opacity: 0.14;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(135deg, rgba(0,0,0,0.7), transparent 75%);
+            pointer-events: none;
+        }
+
+        .brand-top {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+
+        .brand-top img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.14);
+            padding: 10px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .brand-text .brand-name {
+            font-size: 23px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: 0.2px;
+        }
+
+        .brand-text .brand-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.80);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 520px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.14);
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .eyebrow-dot {
+            width: 8px;
+            height: 8px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.18);
+        }
+
+        .hero-title {
+            font-size: 40px;
+            line-height: 1.12;
+            font-weight: 700;
+            margin: 0 0 14px;
+            letter-spacing: -0.7px;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.84);
+            margin: 0 0 28px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 26px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 22px;
+            padding: 18px 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card .icon {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h6 {
+            margin: 0 0 6px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.76);
+        }
+
+        .stats-strip {
+            margin-top: 26px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .stat-chip {
+            padding: 12px 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            min-width: 132px;
+        }
+
+        .stat-chip .number {
             display: block;
-            padding: 14px 10px 16px;
-            background: #FCFCFC;
-            border-bottom: 1px solid #EEEEEE;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-chip .label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.76);
+        }
+
+        .login-panel {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 52px 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .mobile-brand {
+            display: none;
             text-align: center;
+            margin-bottom: 22px;
         }
 
-        .header img {
-            max-width: 100%;
-            display: inline-block;
-            outline: none;
+        .mobile-brand img {
+            width: 78px;
+            height: 78px;
+            object-fit: contain;
+            margin-bottom: 10px;
         }
 
-        .bdcont {
-            padding: 32px 16px 24px 16px;
+        .auth-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
-        .bdcont form {
-            padding: 5% 0;
+        .auth-badge::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
         }
 
-        .bdcont .title,
-        .bdcont .sub-title {
+        .title {
+            font-size: 33px;
+            line-height: 1.2;
+            font-weight: 700;
+            margin: 0 0 8px;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        .sub-title {
             display: block;
-            text-align: center;
-            font-family: inherit;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--muted);
+            margin-bottom: 24px;
         }
 
-        .bdcont .title {
-            font-size: 24px;
-            font-weight: 200;
-            color: #333333;
+        .helper-note {
+            font-size: 13px;
+            color: var(--primary);
+            margin: -8px 0 18px;
+            font-weight: 600;
         }
 
-        .bdcont .sub-title,
-        .info {
-            font-size: 14px;
-            font-weight: 400;
-            color: #545454;
-            text-align: center;
-            line-height: 20px;
+        .form-group {
+            margin-bottom: 18px;
         }
 
-        .info {
-            padding: 20px 0px 50px;
+        .form-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #46515f;
+            margin-bottom: 8px;
+        }
+
+        .bmd-form-group {
+            padding-top: 0 !important;
+        }
+
+        .form-control {
+            height: 54px;
+            border-radius: 17px;
+            border: 1px solid var(--border);
+            background: #FFFFFF;
+            padding: 14px 16px !important;
+            font-size: 15px;
+            color: var(--text);
+            box-shadow: none !important;
+            transition: all 0.18s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(0, 154, 154, 0.13) !important;
+        }
+
+        .form-control::placeholder {
+            color: #9AA6B2;
         }
 
         .tx-button {
-            display: block;
+            margin-top: 10px !important;
+            margin-bottom: 18px;
             text-align: center;
-            margin-bottom: 32px;
-            margin-top: 40px !important;
         }
 
         .tx-button .btn {
-            background-color: #cd9548 !important;
-            font-family: inherit;
-            font-weight: 400;
-            padding-right: 50px;
-            padding-left: 50px;
-            box-shadow: none !important;
-            margin-bottom: 0px !important;
+            width: 100%;
+            height: 54px;
+            border: none;
+            border-radius: 17px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+            color: #FFFFFF !important;
             font-size: 16px;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: 0.2px;
+            box-shadow: 0 16px 30px rgba(0, 154, 154, 0.30) !important;
+            margin: 0 !important;
+        }
+
+        .tx-button .btn:hover,
+        .tx-button .btn:focus {
+            background: linear-gradient(135deg, #00AAAA, #007C7C) !important;
+        }
+
+        .text-center {
+            text-align: center;
         }
 
         .btn-link {
             display: inline-block;
-            font-weight: 300 !important;
-            margin-bottom: 24px !important;
+            color: var(--primary) !important;
+            font-size: 14px;
+            font-weight: 700 !important;
+            text-decoration: none;
+            margin-bottom: 18px !important;
         }
 
         .btn-link:hover {
+            color: var(--primary-dark) !important;
             text-decoration: none;
         }
 
-        .error {
-            color: red;
+        #postResultDiv {
+            min-height: 18px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .security-box {
+            margin-top: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #F5FCFC, #FFFFFF);
+            border: 1px solid #DDF0F0;
+        }
+
+        .security-icon {
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+            border-radius: 15px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .security-box h6 {
+            margin: 0 0 4px;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .security-box p {
+            margin: 0;
             font-size: 13px;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .footer-note {
+            margin-top: 16px;
+            font-size: 12px;
+            line-height: 1.7;
+            color: #8A94A5;
+            text-align: center;
+        }
+
+        .error {
+            color: #D32F2F;
+            font-size: 12px;
+            margin-top: 6px;
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            .auth-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel {
+                display: none;
+            }
+
+            .login-panel {
+                padding: 30px 18px;
+            }
+
+            .mobile-brand {
+                display: block;
+            }
+
+            .title {
+                font-size: 28px;
+                text-align: center;
+            }
+
+            .sub-title,
+            .helper-note {
+                text-align: center;
+            }
+
+            .auth-badge {
+                display: flex;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-shell {
+                padding: 14px;
+            }
+
+            .auth-layout {
+                border-radius: 24px;
+            }
+
+            .login-panel {
+                padding: 24px 16px;
+            }
+
+            .login-card {
+                max-width: 100%;
+            }
+
+            .title {
+                font-size: 26px;
+            }
+
+            .sub-title {
+                font-size: 14px;
+            }
+
+            .form-control {
+                height: 50px;
+                border-radius: 14px;
+            }
+
+            .tx-button .btn {
+                height: 50px;
+                border-radius: 14px;
+            }
         }
     </style>
 </head>
 
 <body>
-<div class="container">
-    <div class="header">
-        <img src="./Login with tronx_files/logo2.png" alt="EmbeHome">
-    </div>
+<div class="page-shell">
+    <div class="auth-layout">
+        <div class="hero-panel">
+            <div class="hero-grid-lines"></div>
 
-    <div class="bdcont">
-        <h4 class="title">Login</h4>
-        <label class="sub-title">Login with your existing EmbeHome Credentials</label>
-        <label class="sub-title" id="accountLinkInfo"></label>
-
-        <form id="submitUserDetails" novalidate="novalidate">
-            <div class="form-group bmd-form-group">
-                <label class="bmd-label-floating" for="email">Email</label>
-                <input class="form-control" id="email" type="email" name="email">
+            <div class="brand-top">
+                <img src="./embehome-logo.png" alt="EmbeHome Logo">
+                <div class="brand-text">
+                    <div class="brand-name">EmbeHome</div>
+                    <div class="brand-sub">Smart Living. Secure Control.</div>
+                </div>
             </div>
 
-            <div class="form-group bmd-form-group">
-                <label class="bmd-label-floating" for="password">Password</label>
-                <input class="form-control" id="password" type="password" name="password">
-            </div>
+            <div class="hero-content">
+                <div class="eyebrow"><span class="eyebrow-dot"></span> Secure Account Linking</div>
+                <h1 class="hero-title">Connect your smart home account with confidence.</h1>
+                <p class="hero-desc">
+                    Access your EmbeHome automation securely and continue your Alexa or Google Home linking flow
+                    with a cleaner, modern sign-in experience.
+                </p>
 
-            <div>
-                <input id="redirect_uri" type="hidden" name="redirect_uri" value="">
-                <input id="state" type="hidden" name="state" value="">
-                <input id="client_id" type="hidden" name="client_id" value="">
-                <input id="response_type" type="hidden" name="response_type" value="">
-            </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon">⌂</div>
+                        <h6>Smart Control</h6>
+                        <p>Manage lights, fans, curtains, scenes, and connected devices from one experience.</p>
+                    </div>
 
-            <div id="postResultDiv"></div>
+                    <div class="feature-card">
+                        <div class="icon">⚡</div>
+                        <h6>Instant Access</h6>
+                        <p>Fast login flow designed for quick account linking and smooth onboarding.</p>
+                    </div>
 
-            <div class="tx-button">
-                <button class="btn btn-primary btn-raised" type="submit">Submit</button>
-            </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h6>Secure Data</h6>
+                        <p>Your credentials and linking flow remain protected during sign-in.</p>
+                    </div>
 
-            <div class="text-center">
-                <a class="btn-link" href="https://2ssquare.in/api/aws/forgotpassword">Forgot password?</a>
+                    <div class="feature-card">
+                        <div class="icon">☁</div>
+                        <h6>Cloud Connected</h6>
+                        <p>Reliable cloud-based integration for voice assistants and automation services.</p>
+                    </div>
+                </div>
+
+                <div class="stats-strip">
+                    <div class="stat-chip">
+                        <span class="number">24/7</span>
+                        <span class="label">Connected Access</span>
+                    </div>
+
+                    <div class="stat-chip">
+                        <span class="number">Secure</span>
+                        <span class="label">Account Linking</span>
+                    </div>
+
+                    <div class="stat-chip">
+                        <span class="number">Smart</span>
+                        <span class="label">Automation Ready</span>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
+
+        <div class="login-panel">
+            <div class="login-card">
+                <div class="mobile-brand">
+                    <img src="./embehome-logo.png" alt="EmbeHome Logo">
+                </div>
+
+                <div class="auth-badge">EmbeHome Secure Sign In</div>
+
+                <h4 class="title">Welcome Back</h4>
+                <label class="sub-title">Sign in with your existing EmbeHome account to continue.</label>
+                <label class="helper-note" id="accountLinkText"></label>
+
+                <form id="submitUserDetails" novalidate="novalidate">
+                    <div class="form-group bmd-form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" id="email" type="email" name="email" placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group bmd-form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" id="password" type="password" name="password" placeholder="Enter your password">
+                    </div>
+
+                    <div>
+                        <input id="redirect_uri" type="hidden" name="redirect_uri" value="">
+                        <input id="state" type="hidden" name="state" value="">
+                    </div>
+
+                    <div id="postResultDiv"></div>
+
+                    <div class="tx-button">
+                        <button class="btn btn-primary btn-raised" type="submit">Continue</button>
+                    </div>
+
+                    <div class="text-center">
+                        <a class="btn-link" href="https://2ssquare.in/api/aws/forgotpassword">Forgot password?</a>
+                    </div>
+                </form>
+
+                <div class="security-box">
+                    <div class="security-icon">✓</div>
+                    <div>
+                        <h6>Safe and trusted access</h6>
+                        <p>
+                            Continue securely to link your EmbeHome account with supported voice assistant services.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="footer-note">
+                    By continuing, you agree to securely link your EmbeHome account for supported voice assistant services.
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.1.3/js/bootstrap-material-design.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.1.3/js/bootstrap-material-design.umd.min.js"
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         if ($.fn.bootstrapMaterialDesign) {
             $('body').bootstrapMaterialDesign();
         }
 
         var urlParams = new URLSearchParams(window.location.search);
+        var state = urlParams.get("state");
+        var redirect_uri = urlParams.get("redirect_uri");
 
-        var state = urlParams.get("state") || "";
-        var redirect_uri = urlParams.get("redirect_uri") || "";
-        var client_id = urlParams.get("client_id") || "";
-        var response_type = urlParams.get("response_type") || "";
+        $("#state").val(state || "");
+        $("#redirect_uri").val(redirect_uri || "");
 
-        $("#state").val(state);
-        $("#redirect_uri").val(redirect_uri);
-        $("#client_id").val(client_id);
-        $("#response_type").val(response_type);
-
-        if (redirect_uri.indexOf("oauth-redirect.googleusercontent.com") !== -1) {
-            $("#accountLinkInfo").text("By signing in, you are authorizing Google to access your devices.");
+        if (redirect_uri && redirect_uri.indexOf("oauth-redirect.googleusercontent.com") !== -1) {
+            $("#accountLinkText").text("You are securely connecting your Google Home account.");
+        } else if (redirect_uri && redirect_uri.indexOf("alexa.") !== -1) {
+            $("#accountLinkText").text("You are securely connecting your Alexa account.");
         }
 
         $("#submitUserDetails").validate({
@@ -184,34 +734,13 @@
                 }
             },
 
-            messages: {
-                email: {
-                    required: "Please enter your email",
-                    email: "Please enter a valid email"
-                },
-                password: {
-                    required: "Please enter your password"
-                }
-            },
-
             submitHandler: function (form) {
-                $("#postResultDiv").html("");
-
                 var formData = {
                     email: $("#email").val(),
                     password: $("#password").val(),
                     realm: "Smartron",
-                    redirect_uri: $("#redirect_uri").val(),
-                    state: $("#state").val(),
-                    client_id: $("#client_id").val(),
-                    response_type: $("#response_type").val()
-                };
-
-                if (!formData.redirect_uri || !formData.state) {
-                    $("#postResultDiv").html(
-                        "<p style='color:red'>Invalid account linking request. Please start linking again from Alexa or Google Home.</p>"
-                    );
-                    return false;
+                    redirect_uri: redirect_uri,
+                    state: state
                 }
 
                 $.ajax({
@@ -219,27 +748,64 @@
                     contentType: "application/json",
                     url: "https://2ssquare.in/api/aws/authorization",
                     data: JSON.stringify(formData),
-                    dataType: "json",
-                    success: function (res) {
+                    dataType: 'json',
+                    success: function(res) {
                         console.log(JSON.stringify(res));
-                        console.log("Redirecting to account linking redirect uri");
-
-                        if (res && res.url_string) {
-                            location.href = res.url_string;
-                        } else {
-                            $("#postResultDiv").html(
-                                "<p style='color:red'>Unable to complete account linking. Please try again.</p>"
-                            );
-                        }
+                        console.log("Redirecting to alexa redirect uri");
+                        location.href = res.url_string;
                     },
-                    error: function (res) {
-                        console.log("Error", res);
-                        $("#postResultDiv").html(
-                            "<p style='color:red'>Invalid Username/Password <br></p>"
-                        );
+                    error: function(res) {
+                        console.log("Error");
+                        $("#postResultDiv").html("<p style='color:red'>Invalid Username/Password <br></p>");
                     }
                 });
+                return false;
+            }
+        });
 
+        $('#forgotpassword').validate({
+            rules: {
+                "email": {
+                    validate_email: true,
+                    email: true
+                }
+            },
+            errorPlacement: function(error, element) {
+                error.insertAfter(element.parent());
+            },
+
+            submitHandler: function(form) {
+                var email = $(form).find("input[type=email]").val();
+
+                var formData = {
+                    email: $("#email").val()
+                }
+
+                $.ajax({
+                    url: "/api/user/forgot_password",
+                    contentType: "application/json",
+                    type: "POST",
+                    dataType: 'json',
+                    data: JSON.stringify(formData),
+                    beforeSend: function(xhr, settings) {
+                        $("form#forgotpassword").find("input[type='submit']").attr("disabled", true);
+                    },
+                    success: function(resp) {
+                        document.getElementById("forgotpassword").reset();
+                        $(".bg-danger").hide();
+                        $("form#forgotpassword").find("input[type='submit']").removeClass('disabled');
+                        $("form#forgotpassword").replaceWith('<div class=""><div class="activateemail-container" style="margin: 55px 0px;"><p class="activateemail-text">We have sent a password reset link to your email id <b>'+email+'<b></p></div></div>');
+                    },
+                    error: function(xhr, status, error) {
+                        var resp = $.parseJSON(xhr.responseText);
+                        $(".bg-danger").hide();
+                        $('<p style="color:red";padding: 10px 0px;">'+resp.error+'</p>').insertAfter('#email');
+                        $("form#forgotpassword").find("input[type='submit']").val('Reset').removeClass('disabled');
+                    },
+                    complete: function(xhr, status) {
+
+                    }
+                });
                 return false;
             }
         });
