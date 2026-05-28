@@ -1,113 +1,401 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Login with EmbeHome</title><!-- Material Design for Bootstrap CSS--><!-- link(rel='stylesheet', type='text/css', href='/assets/css/bootstrap-material-design.min.css')--><link rel="stylesheet" href="./Login with tronx_files/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"><!-- link(rel='stylesheet', type='text/css', href='/assets/css/style.css')--><style>@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,400,600');
-body{ background:#ffffff; font-family: 'Nunito Sans', sans-serif; }
-.container{ padding: 0px;}
-.header{ display:block; padding:14px 10px 16px; background:#FCFCFC; border-bottom:1px solid #EEEEEE; text-align: center;}
-.header img{ max-width: 100%; display:inline-block; outline:none; }
-.bdcont{ padding:32px 16px 24px 16px;}
-.bdcont form{ padding:5% 0;}
-.bdcont .title, .bdcont .sub-title{ display: block; text-align: center; font-family: inherit; }
-.bdcont .title{  font-size: 24px; font-weight: 200; color:#333333;  }
-.bdcont .sub-title, .info{ font-size: 14px; font-weight:400; color:#545454; text-align: center; line-height: 20px}
-.info{ padding:20px 0px 50px }
-.tx-button { display: block; text-align: center; margin-bottom: 32px; margin-top:40px !important;}
-.tx-button .btn{ background-color:#cd9548 !important; font-family: inherit; font-weight:400;  padding-right:50px; padding-left:50px; box-shadow: none !important; margin-bottom:0px !important; font-size: 16px; }
-.btn-link { display:inline-block; font-weight: 300 !important; /*color:#16AAAA !important;*/ margin-bottom:24px !important; }
-.btn-link:hover{ text-decoration: none;}</style></head><body cz-shortcut-listen="true"><div class="container"><div class="header"><img src="./Login with tronx_files/logo2.png" alt="EmbeHome"></div><div class="bdcont"><h4 class="title">Login</h4><label class="sub-title">Login wth your existing EmbeHome ID</label><label class="sub-title"></label><form id="submitUserDetails" novalidate="novalidate"><div class="form-group bmd-form-group"><label class="bmd-label-floating" for="email">Email</label><input class="form-control" id="email" type="email" name="email"></div><div class="form-group bmd-form-group"><label class="bmd-label-floating" for="password">Password</label><input class="form-control" id="password" type="password" name="password"></div><div><input id="redirect_uri" type="hidden" name="redirect_uri" value="https://alexa.amazon.co.jp/api/skill/link/MR5MUZUEUO35N"><input id="state" type="hidden" name="state" value="A2SAAEAELF4_7khhn5GzxCTLSELpb8CENXnnhjZuKcUNvmsX3cd4oQ0RHA0H_5wXGaCd_DhU1hlHMKi3Q_GdyybYBi-xd07DmPvsNYqgysyCiFFxGQpF-O56I3i7L9mNwqoIUBuoFLwCyZ4l7e-9uXqsbYZh7C--Cnh8Tlrg9U_U1sVckhkTuhAGLga5uORp5fe7iLNXjEFOoY35B5vfaQ6eYF_4P9_YnxemI46-7VQSU1op4gZAp8yT2NUrOYNe-Y_N9ndnk4dg3ze2YAHqwgzHjKrG2ZE28Ods1AQpfiJ0duRsQ0jUsU8eAzVtk3q86He7t6tOvb_DHcM8LfbrRsEwNGn3VjqwLZ1S-FAS-TXwL3S-FyRrmgwgF6a4xZAohSJm6oz-RxjanZRIvwTWgW9YPUwjrhbggukQdpsVIxRm6mekkGL2zeUPd8F4rKA2pEfZLnPA3TLOVZQxYbQZxqBVeuLhgv9CcxSPAyf7sJGGzOiDANKk6oxK4yvuCzqtlRb8k3f7jl3PLvNTo8GV5meChHHQ3IXTdfNpRAPBx2sM9NAScwxse9Xq_-DGrjqzuS011q4zZo4lXZQ7KGR14Ylvsk04iJqWTFnO5Gh8U5Zsb5-BEBRf0crpdaUZ52TMMYVaRTQc2Lw5EeBRr0qIadSqSAosKGhVqvhR4W-iWu1V8aU7pGAZjZI7mZWcjndhkhhNVTOFjzNAQOVpXaHCD1W7vw9exKFeA"></div><div id="postResultDiv"></div><div class="tx-button"><button class="btn btn-primary btn-raised" type="submit">Submit</button></div><div class="text-center"><a class="btn-link" href="https://2ssquare.in/api/aws/forgotpassword">Forgot password?</a></div></form></div></div><!-- jQuery first, then Popper.js, then Bootstrap JS--><script src="./Login with tronx_files/jquery.min.js.download"></script><script src="./Login with tronx_files/popper.min.js.download" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script><script src="./Login with tronx_files/bootstrap-material-design.js.download" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script><script src="./Login with tronx_files/jquery.validate.min.js.download"></script><script>$(document).ready(function() {
-    $('body').bootstrapMaterialDesign();
-	var urlParams = new URLSearchParams(window.location.search);
-    var state = urlParams.get("state");
-	var redirect_uri = urlParams.get("redirect_uri");
-    $("#submitUserDetails").validate({
-        rules: {
-            email: {
-                required: true,
-                email: true
-            },
-            password: {
-                required: true
-            }
-        },
-        
-        submitHandler: function (form) {
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Login with EmbeHome</title>
 
-            var formData = {
-                email: $("#email").val(),
-                password: $("#password").val(),
-                realm: "Smartron",
-                redirect_uri: redirect_uri,
-                state: state
-            }
+  <style>
+    :root {
+      --primary: #009a9a;
+      --primary-dark: #057575;
+      --text: #202124;
+      --muted: #667085;
+      --border: #e6eaef;
+      --danger: #d92d20;
+      --bg: #f6fbfb;
+      --card: #ffffff;
+    }
 
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "https://2ssquare.in/api/aws/authorization",
-                data: JSON.stringify(formData),
-                dataType: 'json',
-                success: function(res) {
-                    console.log(JSON.stringify(res));
-                    console.log("Redirecting to alexa redirect uri");
-                    location.href = res.url_string;
-                    },
-                error: function(res)   {
-                    console.log("Error");
-                        $("#postResultDiv").html("<p style='color:red'>" + "Invalid Username/Password <br>" + "</p>");
-                }
-            });
-            return false; // required to block normal submit since you used ajax
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(0, 154, 154, 0.12), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 14px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      margin-top: 18px;
+      background: var(--card);
+      border: 1px solid rgba(0, 154, 154, 0.12);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(10, 45, 45, 0.12);
+    }
+
+    .header {
+      padding: 24px 18px 20px;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(0, 154, 154, 0.16), rgba(0, 154, 154, 0.04)),
+        #ffffff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-badge {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 12px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: -0.03em;
+      box-shadow: 0 10px 24px rgba(0, 154, 154, 0.25);
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 750;
+      color: #101828;
+    }
+
+    .brand-subtitle {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .content {
+      padding: 26px 20px 22px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 650;
+      color: #344054;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      height: 50px;
+      padding: 0 14px;
+      border: 1px solid #d0d5dd;
+      border-radius: 14px;
+      outline: none;
+      background: #ffffff;
+      color: #101828;
+      font-size: 15px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 154, 154, 0.14);
+    }
+
+    .message {
+      display: none;
+      margin: 4px 0 16px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .message.error {
+      display: block;
+      color: #b42318;
+      background: #fff1f0;
+      border: 1px solid #fecdca;
+    }
+
+    .message.info {
+      display: block;
+      color: #055c5c;
+      background: #ecfdfd;
+      border: 1px solid rgba(0, 154, 154, 0.22);
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 52px;
+      border: 0;
+      border-radius: 16px;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 750;
+      box-shadow: 0 12px 22px rgba(0, 154, 154, 0.22);
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.62;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .forgot {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: var(--primary-dark);
+      font-size: 14px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .forgot:hover {
+      text-decoration: underline;
+    }
+
+    .small-note {
+      margin: 18px 0 0;
+      text-align: center;
+      color: #98a2b3;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+  </style>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var redirectUri = params.get("redirect_uri") || "";
+
+      // Keep existing Google OAuth separation behavior.
+      if (redirectUri.indexOf("oauth-redirect.googleusercontent.com") !== -1) {
+        window.location.replace("../GoogleOAuthLogin/" + window.location.search);
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <main class="page">
+    <section class="card" aria-label="EmbeHome login">
+      <header class="header">
+        <div class="brand-badge" aria-hidden="true">E</div>
+        <h1 class="brand-title">Login</h1>
+        <span class="brand-subtitle">Login with your existing EmbeHome ID</span>
+      </header>
+
+      <div class="content">
+        <form id="submitUserDetails" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input class="form-control" id="email" type="email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input class="form-control" id="password" type="password" name="password" autocomplete="current-password" required />
+          </div>
+
+          <!-- Values are intentionally blank. Alexa sends fresh state/redirect_uri in URL params. -->
+          <input id="redirect_uri" type="hidden" name="redirect_uri" value="" />
+          <input id="state" type="hidden" name="state" value="" />
+
+          <div id="postResultDiv" role="alert"></div>
+
+          <button id="submitBtn" class="submit-btn" type="submit">Submit</button>
+
+          <a class="forgot" href="https://2ssquare.in/api/aws/forgotpassword">Forgot password?</a>
+
+          <p class="small-note">After login, you will be redirected back to Alexa to finish account linking.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var AUTHORIZATION_URL = "https://2ssquare.in/api/aws/authorization";
+      var REALM = "Smartron";
+
+      var form = document.getElementById("submitUserDetails");
+      var emailInput = document.getElementById("email");
+      var passwordInput = document.getElementById("password");
+      var redirectInput = document.getElementById("redirect_uri");
+      var stateInput = document.getElementById("state");
+      var messageBox = document.getElementById("postResultDiv");
+      var submitBtn = document.getElementById("submitBtn");
+
+      function getParam(name) {
+        return new URLSearchParams(window.location.search).get(name) || "";
+      }
+
+      function showMessage(type, text) {
+        messageBox.className = "message " + type;
+        messageBox.textContent = text;
+      }
+
+      function clearMessage() {
+        messageBox.className = "";
+        messageBox.textContent = "";
+      }
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function setLoading(isLoading) {
+        submitBtn.disabled = isLoading;
+        submitBtn.textContent = isLoading ? "Please wait..." : "Submit";
+      }
+
+      var stateFromUrl = getParam("state");
+      var redirectUriFromUrl = getParam("redirect_uri");
+
+      redirectInput.value = redirectUriFromUrl;
+      stateInput.value = stateFromUrl;
+
+      console.log(
+        "alexa_login_page_ready",
+        "state=" + Boolean(stateFromUrl),
+        "redirect_uri=" + Boolean(redirectUriFromUrl)
+      );
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        clearMessage();
+
+        var email = emailInput.value.trim();
+        var password = passwordInput.value;
+        var state = getParam("state") || stateInput.value.trim();
+        var redirectUri = getParam("redirect_uri") || redirectInput.value.trim();
+
+        console.log(
+          "alexa_login_submit_clicked",
+          "state=" + Boolean(state),
+          "redirect_uri=" + Boolean(redirectUri)
+        );
+
+        if (!state || !redirectUri) {
+          showMessage("error", "Alexa linking session expired. Please start linking again from the Alexa app.");
+          return;
         }
-    });
 
-
-    $('#forgotpassword').validate({
-        rules: {
-            "email": {
-                validate_email: true,
-                email: true
-            }
-        },
-        errorPlacement: function(error, element) {
-            error.insertAfter(element.parent());
-        },
-
-        submitHandler: function(form) {
-            var email = $(form).find("input[type=email]").val();
-
-
-            var formData = {
-                email: $("#email").val()
-            }
-
-            $.ajax({
-                url: "/api/user/forgot_password",
-                contentType: "application/json",
-                type: "POST",
-                dataType: 'json',
-                data: JSON.stringify(formData),
-                beforeSend: function(xhr, settings) {
-                    $("form#forgotpassword").find("input[type='submit']").attr("disabled", true);
-                },
-                success: function(resp) {
-                    document.getElementById("forgotpassword").reset();
-                    $(".bg-danger").hide();
-                    $("form#forgotpassword").find("input[type='submit']").removeClass('disabled');
-                    $("form#forgotpassword").replaceWith('<div class=""><div class="activateemail-container" style="margin: 55px 0px;"><p class="activateemail-text">We have sent a password reset link to your email id <b>'+email+'<b></p></div></div>');
-
-                },
-                error: function(xhr, status, error) {
-                    var resp = $.parseJSON(xhr.responseText);
-                    $(".bg-danger").hide();
-                    $('<p style="color:red";padding: 10px 0px;>'+resp.error+'</p>').insertAfter('#email');
-                    $("form#forgotpassword").find("input[type='submit']").val('Reset').removeClass('disabled');
-                },
-                complete: function(xhr, status) {
-
-                }
-            });
-            return false;
+        if (!email || !isValidEmail(email)) {
+          showMessage("error", "Please enter a valid email address.");
+          emailInput.focus();
+          return;
         }
-    });
 
+        if (!password) {
+          showMessage("error", "Please enter your password.");
+          passwordInput.focus();
+          return;
+        }
 
-});</script></body></html>
+        var payload = {
+          email: email,
+          password: password,
+          realm: REALM,
+          redirect_uri: redirectUri,
+          state: state
+        };
+
+        setLoading(true);
+        showMessage("info", "Verifying your EmbeHome account...");
+
+        console.log("alexa_login_authorization_post_started");
+
+        fetch(AUTHORIZATION_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        })
+          .then(function (response) {
+            return response.text().then(function (rawText) {
+              var data = null;
+
+              try {
+                data = rawText ? JSON.parse(rawText) : null;
+              } catch (parseError) {
+                console.error("alexa_login_invalid_json_response", parseError, rawText);
+              }
+
+              if (!response.ok) {
+                var error = new Error("Authorization failed");
+                error.status = response.status;
+                error.responseText = rawText;
+                throw error;
+              }
+
+              return data;
+            });
+          })
+          .then(function (data) {
+            var redirectUrl = data && data.url_string;
+
+            console.log("alexa_login_auth_success", "redirect_present=" + Boolean(redirectUrl));
+
+            if (!redirectUrl) {
+              showMessage("error", "Login succeeded, but Alexa redirect URL was missing. Please contact support.");
+              setLoading(false);
+              return;
+            }
+
+            window.location.href = redirectUrl;
+          })
+          .catch(function (error) {
+            console.error(
+              "alexa_login_authorization_failed",
+              "status=" + (error.status || "network_or_cors"),
+              error.responseText || error.message
+            );
+
+            showMessage("error", "Invalid Username/Password or Alexa linking session expired.");
+            setLoading(false);
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
