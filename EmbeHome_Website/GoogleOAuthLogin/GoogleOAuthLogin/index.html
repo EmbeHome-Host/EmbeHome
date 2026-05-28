@@ -211,6 +211,11 @@
       color: #344054;
     }
 
+    .password-wrap {
+      position: relative;
+      width: 100%;
+    }
+
     input[type="email"],
     input[type="password"] {
       width: 100%;
@@ -226,8 +231,43 @@
       transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
     }
 
+    .password-wrap input[type="password"],
+    .password-wrap input[type="text"] {
+      padding-right: 48px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: #667085;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .password-toggle:hover {
+      background: rgba(0, 154, 154, 0.08);
+      color: var(--primary-dark);
+    }
+
+    .password-toggle svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
     input[type="email"]:focus,
-    input[type="password"]:focus {
+    input[type="password"]:focus,
+    input[type="text"]:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 4px rgba(0, 154, 154, 0.14);
       transform: translateY(-1px);
@@ -346,7 +386,7 @@
     <section class="card" aria-label="EmbeHome Google Home login">
       <header class="hero">
         <div class="logo-wrap" aria-label="EmbeHome logo">
-          <img class="brand-logo" src="./embehome-logo-primary.png" alt="EmbeHome" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <img class="brand-logo" src="./EmbeHome_AppPrimary.png" alt="EmbeHome" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
           <div class="fallback-logo" aria-hidden="true">E</div>
         </div>
 
@@ -373,7 +413,15 @@
 
           <div class="field">
             <label for="password">Password</label>
-            <input class="form-control" id="password" type="password" name="password" autocomplete="current-password" required />
+            <div class="password-wrap">
+              <input class="form-control" id="password" type="password" name="password" autocomplete="current-password" required />
+              <button id="togglePassword" class="password-toggle" type="button" aria-label="Show password" aria-pressed="false">
+                <svg class="eye-open" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
           </div>
 
           <input id="redirect_uri" type="hidden" name="redirect_uri" value="" />
@@ -402,6 +450,7 @@
       var form = document.getElementById("submitUserDetails");
       var emailInput = document.getElementById("email");
       var passwordInput = document.getElementById("password");
+      var togglePasswordBtn = document.getElementById("togglePassword");
       var redirectInput = document.getElementById("redirect_uri");
       var stateInput = document.getElementById("state");
       var messageBox = document.getElementById("postResultDiv");
@@ -444,6 +493,13 @@
         "state=" + Boolean(stateFromUrl),
         "redirect_uri=" + Boolean(redirectUriFromUrl)
       );
+
+      togglePasswordBtn.addEventListener("click", function () {
+        var isPasswordHidden = passwordInput.type === "password";
+        passwordInput.type = isPasswordHidden ? "text" : "password";
+        togglePasswordBtn.setAttribute("aria-label", isPasswordHidden ? "Hide password" : "Show password");
+        togglePasswordBtn.setAttribute("aria-pressed", String(isPasswordHidden));
+      });
 
       cancelBtn.addEventListener("click", function () {
         if (window.history.length > 1) {
