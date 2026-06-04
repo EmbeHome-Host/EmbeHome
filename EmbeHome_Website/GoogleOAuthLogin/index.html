@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Link your EmbeHome account with Google Home</title>
+  <title>Connect EmbeHome to Google</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,9 +11,9 @@
 
   <style>
     :root {
-      --primary: #009a9a;
-      --primary-dark: #057575;
-      --primary-soft: #e8fbfb;
+      --primary: #108b8b;
+      --primary-dark: #0a7373;
+      --primary-soft: #e8f7f7;
       --text: #101828;
       --muted: #667085;
       --border: #e6eaef;
@@ -40,8 +40,8 @@
       min-height: 100vh;
       color: var(--text);
       background:
-        radial-gradient(circle at 16% 10%, rgba(0, 154, 154, 0.18), transparent 30%),
-        radial-gradient(circle at 86% 20%, rgba(0, 154, 154, 0.10), transparent 32%),
+        radial-gradient(circle at 16% 10%, rgba(16, 139, 139, 0.18), transparent 30%),
+        radial-gradient(circle at 86% 20%, rgba(16, 139, 139, 0.10), transparent 32%),
         linear-gradient(180deg, #f7ffff 0%, #eefafa 48%, #ffffff 100%);
     }
 
@@ -61,7 +61,7 @@
       content: "";
       position: absolute;
       border-radius: 999px;
-      background: rgba(0, 154, 154, 0.08);
+      background: rgba(16, 139, 139, 0.08);
       pointer-events: none;
     }
 
@@ -85,7 +85,7 @@
       position: relative;
       z-index: 1;
       background: rgba(255, 255, 255, 0.96);
-      border: 1px solid rgba(0, 154, 154, 0.14);
+      border: 1px solid rgba(16, 139, 139, 0.14);
       border-radius: 30px;
       overflow: hidden;
       box-shadow: 0 22px 55px var(--shadow);
@@ -95,9 +95,9 @@
       padding: 24px 22px 18px;
       text-align: center;
       background:
-        linear-gradient(135deg, rgba(0, 154, 154, 0.17), rgba(255, 255, 255, 0.92)),
+        linear-gradient(135deg, rgba(16, 139, 139, 0.17), rgba(255, 255, 255, 0.92)),
         #ffffff;
-      border-bottom: 1px solid rgba(0, 154, 154, 0.12);
+      border-bottom: 1px solid rgba(16, 139, 139, 0.12);
     }
 
     .logo-wrap {
@@ -109,8 +109,8 @@
       align-items: center;
       justify-content: center;
       background: #ffffff;
-      border: 1px solid rgba(0, 154, 154, 0.18);
-      box-shadow: 0 12px 28px rgba(0, 154, 154, 0.22);
+      border: 1px solid rgba(16, 139, 139, 0.18);
+      box-shadow: 0 12px 28px rgba(16, 139, 139, 0.22);
     }
 
     .brand-logo {
@@ -131,27 +131,6 @@
       font-size: 24px;
       font-weight: 800;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin: 2px 0 10px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      color: #056b6b;
-      background: rgba(0, 154, 154, 0.10);
-      font-size: 12px;
-      font-weight: 750;
-    }
-
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--primary);
-      box-shadow: 0 0 0 4px rgba(0, 154, 154, 0.12);
     }
 
     .title {
@@ -175,19 +154,18 @@
       padding: 22px 22px 24px;
     }
 
-    .permission-card {
-      margin-bottom: 18px;
-      padding: 14px;
-      border-radius: 20px;
-      background: linear-gradient(180deg, #f7ffff, #ffffff);
-      border: 1px solid rgba(0, 154, 154, 0.14);
+    .consent-statement,
+    .data-access-statement {
+      margin: 0 0 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 500;
+      color: #475467;
     }
 
-    .permission-title {
-      margin: 0 0 8px;
-      color: #055c5c;
-      font-size: 13px;
-      font-weight: 800;
+    .consent-statement {
+      font-weight: 600;
+      color: #344054;
     }
 
     .permission-list {
@@ -197,6 +175,10 @@
       font-size: 12.5px;
       line-height: 1.55;
       font-weight: 500;
+    }
+
+    .permission-list--summary {
+      margin: 0 0 18px;
     }
 
     .field {
@@ -255,7 +237,7 @@
     }
 
     .password-toggle:hover {
-      background: rgba(0, 154, 154, 0.08);
+      background: rgba(16, 139, 139, 0.08);
       color: var(--primary-dark);
     }
 
@@ -269,7 +251,7 @@
     input[type="password"]:focus,
     input[type="text"]:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(0, 154, 154, 0.14);
+      box-shadow: 0 0 0 4px rgba(16, 139, 139, 0.14);
       transform: translateY(-1px);
     }
 
@@ -294,7 +276,7 @@
       display: block;
       color: #055c5c;
       background: #ecfdfd;
-      border: 1px solid rgba(0, 154, 154, 0.22);
+      border: 1px solid rgba(16, 139, 139, 0.22);
     }
 
     .submit-btn {
@@ -307,13 +289,13 @@
       color: #ffffff;
       font-size: 15.5px;
       font-weight: 800;
-      box-shadow: 0 14px 26px rgba(0, 154, 154, 0.24);
+      box-shadow: 0 14px 26px rgba(16, 139, 139, 0.24);
       transition: transform 0.12s ease, opacity 0.12s ease, box-shadow 0.12s ease;
     }
 
     .submit-btn:active {
       transform: translateY(1px);
-      box-shadow: 0 9px 18px rgba(0, 154, 154, 0.20);
+      box-shadow: 0 9px 18px rgba(16, 139, 139, 0.20);
     }
 
     .submit-btn:disabled {
@@ -326,7 +308,7 @@
       width: 100%;
       height: 48px;
       margin-top: 10px;
-      border: 1px solid rgba(0, 154, 154, 0.18);
+      border: 1px solid rgba(16, 139, 139, 0.18);
       border-radius: 16px;
       cursor: pointer;
       background: #ffffff;
@@ -340,27 +322,27 @@
       cursor: not-allowed;
     }
 
-    .forgot {
-      display: block;
-      margin-top: 17px;
-      text-align: center;
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .footer-links a {
       color: var(--primary-dark);
-      font-size: 14px;
-      font-weight: 750;
       text-decoration: none;
     }
 
-    .forgot:hover {
+    .footer-links a:hover {
       text-decoration: underline;
     }
 
-    .small-note {
-      margin: 16px 0 0;
-      text-align: center;
-      color: #98a2b3;
-      font-size: 12px;
-      line-height: 1.45;
-      font-weight: 500;
+    .footer-links span {
+      color: #d0d5dd;
     }
 
     @media (max-width: 380px) {
@@ -383,27 +365,25 @@
 
 <body>
   <main class="page">
-    <section class="card" aria-label="EmbeHome Google Home login">
+    <section class="card" aria-label="Connect EmbeHome to Google">
       <header class="hero">
         <div class="logo-wrap" aria-label="EmbeHome logo">
           <img class="brand-logo" src="./EmbeHome_AppPrimary.png" alt="EmbeHome" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
           <div class="fallback-logo" aria-hidden="true">E</div>
         </div>
 
-        <div class="eyebrow"><span class="eyebrow-dot"></span>Google Home Account Linking</div>
-        <h1 class="title">Link your EmbeHome account</h1>
-        <p class="subtitle">Sign in with your EmbeHome ID to connect your smart home devices with Google Home.</p>
+        <h1 class="title">Connect EmbeHome to Google</h1>
+        <p class="subtitle">Sign in to your EmbeHome account to link it with Google.</p>
       </header>
 
       <div class="content">
-        <div class="permission-card" aria-label="Google Home permissions">
-          <p class="permission-title">Google Home can control</p>
-          <ul class="permission-list">
-            <li>Supported EmbeHome lights, fans, and blinds</li>
-            <li>On/off, brightness, fan speed, and open/close controls</li>
-            <li>Account linking will continue in Google Home after login</li>
-          </ul>
-        </div>
+        <p class="consent-statement">By signing in, you are authorizing Google to control your EmbeHome devices.</p>
+        <p class="data-access-statement">Google will be able to view and control your linked EmbeHome devices, including lights, fans, blinds, switches, scenes, and supported automation devices.</p>
+        <ul class="permission-list permission-list--summary">
+          <li>Supported EmbeHome lights, fans, blinds, switches, and scenes</li>
+          <li>On/off, brightness, fan speed, and open/close controls</li>
+          <li>Account linking will continue with Google after login</li>
+        </ul>
 
         <form id="submitUserDetails" novalidate>
           <div class="field">
@@ -429,12 +409,14 @@
 
           <div id="postResultDiv" role="alert"></div>
 
-          <button id="submitBtn" class="submit-btn" type="submit">Agree and Link</button>
+          <button id="submitBtn" class="submit-btn" type="submit">Agree and link</button>
           <button id="cancelLink" class="cancel-btn" type="button">Cancel</button>
 
-          <a class="forgot" href="https://2ssquare.in/api/aws/forgotpassword">Forgot password?</a>
-
-          <p class="small-note">By continuing, you authorize Google Home to control supported EmbeHome devices.</p>
+          <nav class="footer-links" aria-label="Legal">
+            <a href="https://embehome.in/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>
+            <span aria-hidden="true">·</span>
+            <a href="https://embehome.in/terms-and-conditions/" target="_blank" rel="noopener">Terms</a>
+          </nav>
         </form>
       </div>
     </section>
@@ -478,7 +460,7 @@
       function setLoading(isLoading) {
         submitBtn.disabled = isLoading;
         cancelBtn.disabled = isLoading;
-        submitBtn.textContent = isLoading ? "Please wait..." : "Agree and Link";
+        submitBtn.textContent = isLoading ? "Please wait..." : "Agree and link";
       }
 
       var stateFromUrl = getParam("state");
@@ -523,7 +505,7 @@
         );
 
         if (!state || !redirectUri) {
-          showMessage("error", "Google Home linking session expired. Please start linking again from the Google Home app.");
+          showMessage("error", "Account linking session expired. Please start linking again from Google.");
           return;
         }
 
@@ -586,7 +568,7 @@
             console.log("google_home_login_auth_success", "redirect_present=" + Boolean(redirectUrl));
 
             if (!redirectUrl) {
-              showMessage("error", "Login succeeded, but Google Home redirect URL was missing. Please contact support.");
+              showMessage("error", "Login succeeded, but the Google redirect URL was missing. Please contact support.");
               setLoading(false);
               return;
             }
@@ -600,7 +582,7 @@
               error.responseText || error.message
             );
 
-            showMessage("error", "Invalid Username/Password or Google Home linking session expired.");
+            showMessage("error", "Invalid Username/Password or account linking session expired.");
             setLoading(false);
           });
       });
